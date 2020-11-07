@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+
+.container__margin {
+  flex: 0.1;
+}
+
+.container__body {
+  flex: 0.8;
+  justify-content: flex-start;
+}
