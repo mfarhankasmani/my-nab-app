@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "mocks": "cd mocks && yarn start"
+    "mocks": "cd mocks && yarn install && yarn start"
   },
   "eslintConfig": {
     "extends": [

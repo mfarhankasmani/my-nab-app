@@ -20,6 +20,8 @@ Runs the mock server required for application\
 Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 Open [http://localhost:5001](http://localhost:5001) to view it in the browser.
 
+make sure to install node dependancy of mocks inside mocks folder
+
 ### `login id - farhan`
 
 To login into application use nab id :- "farhan" with any password
