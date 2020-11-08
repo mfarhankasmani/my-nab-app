@@ -10,29 +10,39 @@ import {
 } from "@material-ui/core";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
+import { useDispatch } from "react-redux";
+import { createNewAccount, updateTabIndex } from "../../store/actions";
+//@ts-ignore
+import uuid from "uuid/dist/v4";
+import { INewAccountData } from "../../store/types";
 
 const options = [
   {
-    value: "personal",
+    value: "Personal Account",
     label: "Personal Account",
   },
   {
-    value: "saving",
+    value: "Saving Account",
     label: "Saving Account",
   },
   {
-    value: "term",
+    value: "Term Deposit Account",
     label: "Term Deposit Account",
   },
   {
-    value: "transaction",
+    value: "Transaction Accounts",
     label: "Transaction Accounts",
   },
   {
-    value: "loan",
+    value: "Loan Account",
     label: "Loan Account",
   },
 ];
+
+interface NewAccountState {
+  name: string;
+  accountType: string;
+}
 
 interface INewAccount {}
 
@@ -57,21 +67,72 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const NewAccount: React.FunctionComponent<INewAccount> = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const [account, setAccount] = React.useState("");
-  const handleChange = (
-    event: React.ChangeEvent<{ value: string | number }>
+  const [values, setValues] = React.useState<NewAccountState>({
+    name: "",
+    accountType: "",
+  });
+
+  const [error, setError] = React.useState({
+    name: false,
+    accountType: false,
+    showAlert: false,
+  });
+
+  const handleChange = (prop: keyof NewAccountState) => (
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setAccount(event.target.value as string);
+    setValues({ ...values, [prop]: event.target.value });
+    setError({ ...error, [prop]: false, showAlert: false });
+  };
+
+  const handleBlur = (prop: keyof NewAccountState) => (
+    event: React.FocusEvent<HTMLInputElement>
+  ) => {
+    if (event.target.value === "") {
+      setError({ ...error, [prop]: true });
+    }
+  };
+
+  const checkError = () => {
+    if (values.accountType === "" && values.name === "") {
+      setError({ ...error, name: true, showAlert: true });
+      return true;
+    }
+    if (values.name === "") {
+      setError({ ...error, name: true, showAlert: true });
+      return true;
+    }
+    if (values.accountType === "") {
+      setError({ ...error, showAlert: true });
+      return true;
+    }
+    return false;
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (checkError()) return;
+    const newAccount: INewAccountData = {
+      accountId: uuid(),
+      accoutType: values.accountType,
+      isPending: true,
+    };
+    dispatch(createNewAccount(newAccount));
+    dispatch(updateTabIndex(0));
+    setValues({ name: "", accountType: "" });
   };
 
   return (
     <Container>
       <div className={classes.newAccount}>
         <Grid item xs={5}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Paper className={classes.root}>
-              <Alert severity="error">Kindly provide below values</Alert>
+              {error.showAlert && (
+                <Alert severity="error">Kindly provide all the values</Alert>
+              )}
               <Typography gutterBottom variant="h5" component="h2">
                 Create new account
               </Typography>
@@ -81,20 +142,22 @@ const NewAccount: React.FunctionComponent<INewAccount> = () => {
                 </Typography>
                 <OutlinedInput
                   id="outlined-adornment-weight"
-                  value={"values.weight"}
-                  // onChange={handleChange('weight')}
+                  value={values.name}
+                  onChange={handleChange("name")}
+                  onBlur={handleBlur("name")}
+                  error={error.name}
                 />
               </FormControl>
               <Grid item xs={5}>
                 <SelectDropdown
-                  value={account}
+                  value={values.accountType}
                   label={"Select account type"}
-                  onChange={handleChange}
+                  onChange={handleChange("accountType")}
                   options={options}
                 />
               </Grid>
               <Grid item xs={5}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" type="submit">
                   Create Account
                 </Button>
               </Grid>

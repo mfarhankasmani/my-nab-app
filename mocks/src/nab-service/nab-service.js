@@ -21,6 +21,7 @@ function addService() {
           is: {
             statusCode: 200,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -45,6 +46,7 @@ function addService() {
           is: {
             statusCode: 404,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ message: "Login failed" }),
@@ -66,6 +68,7 @@ function addService() {
           is: {
             statusCode: 200,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ data: accountResponse }),
@@ -87,6 +90,7 @@ function addService() {
           is: {
             statusCode: 404,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ message: "incorrect user" }),
@@ -108,6 +112,7 @@ function addService() {
           is: {
             statusCode: 200,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ data: res12345678 }),
@@ -129,6 +134,7 @@ function addService() {
           is: {
             statusCode: 200,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ data: res12345679 }),
@@ -150,6 +156,7 @@ function addService() {
           is: {
             statusCode: 200,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ data: res12345689 }),
@@ -171,6 +178,7 @@ function addService() {
           is: {
             statusCode: 404,
             headers: {
+              "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ message: "incorrect account id" }),

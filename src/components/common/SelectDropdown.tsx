@@ -47,7 +47,7 @@ interface ISelectDropdown {
   label: string;
   options: { value: string | number; label: string }[];
   value: string;
-  onChange: (event: React.ChangeEvent<{ value: string | number }>) => void;
+  onChange: any;
 }
 
 const SelectDropdown: React.FunctionComponent<ISelectDropdown> = ({
@@ -59,7 +59,11 @@ const SelectDropdown: React.FunctionComponent<ISelectDropdown> = ({
   const classes = useStyles();
 
   const optionDrop = options.map((opt) => {
-    return <option value={opt.value}>{opt.label}</option>;
+    return (
+      <option value={opt.value} key={opt.value}>
+        {opt.label}
+      </option>
+    );
   });
 
   return (
@@ -73,7 +77,7 @@ const SelectDropdown: React.FunctionComponent<ISelectDropdown> = ({
         onChange={onChange}
         input={<BootstrapInput />}
       >
-        <option aria-label="None" value="" />
+        <option aria-label="None" value="" key={0} />
         {optionDrop}
       </NativeSelect>
     </FormControl>

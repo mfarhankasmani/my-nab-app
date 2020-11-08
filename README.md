@@ -20,6 +20,11 @@ Runs the mock server required for application\
 Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 Open [http://localhost:5001](http://localhost:5001) to view it in the browser.
 
+### `login id - farhan`
+
+To login into application use nab id :- "farhan" with any password
+for any other value login will not work
+
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.\

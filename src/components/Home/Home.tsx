@@ -4,13 +4,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
-
 import {
   Accounts,
   Transactions,
   NewAccount,
   HeaderFooter,
 } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTabIndex } from "../../store/actions";
+import { IState } from "../../store/types";
 
 function a11yProps(index: any) {
   return {
@@ -29,10 +31,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Home = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const value = useSelector((state: IState) => state.tabIndex);
+  const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+    dispatch(updateTabIndex(newValue));
   };
 
   return (
