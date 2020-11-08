@@ -1,0 +1,23 @@
+[
+  {
+    "accountId": "12345678",
+    "accoutType": "Personal Account",
+    "isPending": false,
+    "currentBalance": 2000,
+    "availableBalance": 1500
+  },
+  {
+    "accountId": "12345679",
+    "accoutType": "Saving Account",
+    "isPending": false,
+    "currentBalance": 20000,
+    "availableBalance": 20000
+  },
+  {
+    "accountId": "12345689",
+    "accoutType": "Term Deposit Account",
+    "isPending": false,
+    "currentBalance": 50000,
+    "availableBalance": 35000
+  }
+]
