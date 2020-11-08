@@ -19,17 +19,13 @@ interface IColumnTransactionTable {
 export interface IDataTransactionTable {
   date: string;
   transactionDetails: string;
-  debit: number;
-  credit: number;
+  debit?: number;
+  credit?: number;
   balance: number;
 }
 
 interface ITransactionTable {
   rows: IDataTransactionTable[];
-  page: number;
-  rowsPerPage: number;
-  handleChangePage: (event: unknown, newPage: number) => void;
-  handleChangeRowsPerPage: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const columns: IColumnTransactionTable[] = [
@@ -69,12 +65,23 @@ const useStyles = makeStyles({
 
 const TransactionTable: React.FunctionComponent<ITransactionTable> = ({
   rows,
-  rowsPerPage,
-  page,
-  handleChangePage,
-  handleChangeRowsPerPage,
 }) => {
   const classes = useStyles();
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
     <>
       <TableContainer className={classes.container} component={Paper}>
@@ -95,13 +102,13 @@ const TransactionTable: React.FunctionComponent<ITransactionTable> = ({
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, index) => {
                 return (
                   <StyledTableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={row.transactionDetails}
+                    key={index}
                   >
                     {columns.map((column) => {
                       const value = row[column.id];

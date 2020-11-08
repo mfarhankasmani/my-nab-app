@@ -2,7 +2,6 @@ import React from "react";
 import "./Accounts.css";
 import { Container, StyledTableRow, StyledTableCell } from "../../components";
 import { Typography } from "@material-ui/core";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,23 +9,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
-function createData(
-  accoutType: string,
-  isPending: boolean,
-  currentBalance?: number,
-  availableBalance?: number
-) {
-  return { accoutType, isPending, currentBalance, availableBalance };
-}
-
-const rows = [
-  createData("Personal Account", false, 2000, 2000),
-  createData("Saving Account", false, 3000, 3000),
-  createData("Term Deposit Account", false, 16.0, 24),
-  createData("Transaction Accounts", true, 3.7, 67),
-  createData("Loan Account", true, 16.0, 0),
-];
+import { useDispatch, useSelector } from "react-redux";
+import { IState } from "../../store/types";
+import {
+  setAccounts,
+  selectAccount,
+  updateTabIndex,
+} from "../../store/actions";
 
 const useStyles = makeStyles({
   table: {
@@ -38,6 +27,34 @@ interface IAccounts {}
 
 const Accounts: React.FunctionComponent<IAccounts> = () => {
   const classes = useStyles();
+  const newAccounts = useSelector((state: IState) => state.newAccounts);
+  const accounts = useSelector((state: IState) => state.accounts);
+  const customerId = useSelector((state: IState) => state.customerId);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const getAccounts = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5001/account/${customerId}`
+        );
+        const data = await response.json();
+        if (response.status !== 200) throw new Error("No Account found");
+        dispatch(setAccounts(data.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAccounts();
+    // eslint-disable-next-line
+  }, [customerId]);
+
+  const handleOnClick = (accountId: string) => {
+    dispatch(selectAccount(accountId));
+    dispatch(updateTabIndex(1));
+  };
+
+  const rows = [...accounts, ...newAccounts];
   return (
     <Container>
       <div className="accounts">
@@ -63,7 +80,7 @@ const Accounts: React.FunctionComponent<IAccounts> = () => {
               {rows.map((row) => (
                 <StyledTableRow
                   key={row.accoutType}
-                  onClick={() => console.log(row.accoutType)}
+                  onClick={() => handleOnClick(row.accountId)}
                 >
                   <StyledTableCell component="th" scope="row">
                     {row.accoutType}
@@ -72,10 +89,10 @@ const Accounts: React.FunctionComponent<IAccounts> = () => {
                     {row.isPending && "Pending"}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.currentBalance}
+                    {row.currentBalance && row.currentBalance}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.availableBalance}
+                    {row.availableBalance && row.availableBalance}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

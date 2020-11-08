@@ -2,6 +2,8 @@ import React from "react";
 import { Container } from "..";
 import "./Header.css";
 import { Typography, Button, Grid } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/actions";
 
 interface IHeaderFooter {
   header?: boolean;
@@ -14,6 +16,8 @@ const HeaderFooter: React.FunctionComponent<IHeaderFooter> = ({
   footer = false,
   isLoggedIn = false,
 }) => {
+  const dispatch = useDispatch();
+  const handleLogout = () => dispatch(logout());
   return (
     <div className="headerFooter">
       <Container>
@@ -39,7 +43,11 @@ const HeaderFooter: React.FunctionComponent<IHeaderFooter> = ({
                     INTERNET BANKING
                   </Typography>
                 </Grid>
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleLogout}
+                >
                   Logout
                 </Button>
               </Grid>

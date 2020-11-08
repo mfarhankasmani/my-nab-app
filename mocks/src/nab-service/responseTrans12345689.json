@@ -1,0 +1,94 @@
+[
+  {
+    "date": "2-Nov-20",
+    "transactionDetails": "TRANSFER CREDIT",
+    "credit": 200,
+    "balance": 2153.19
+  },
+  {
+    "date": "2-Nov-20",
+    "transactionDetails": "TRANSFER CREDIT",
+    "credit": 100,
+    "balance": 1953.19
+  },
+
+  {
+    "date": "3-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -18.95,
+    "balance": 27.02
+  },
+  {
+    "date": "3-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -70.15,
+    "balance": 45.97
+  },
+  {
+    "date": "3-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -33.05,
+    "balance": 50.69
+  },
+  {
+    "date": "6-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -9.49,
+    "balance": -4.77
+  },
+  {
+    "date": "7-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -22.3,
+    "balance": 4.72
+  },
+
+  {
+    "date": "7-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -36.2,
+    "balance": 1853.19
+  },
+  {
+    "date": "8-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -10,
+    "balance": 83.74
+  },
+  {
+    "date": "8-Nov-20",
+    "transactionDetails": "TRANSFER CREDIT",
+    "credit": 100,
+    "balance": 116.12
+  },
+  {
+    "date": "10-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -34.57,
+    "balance": 16.12
+  },
+  {
+    "date": "10-Nov-20",
+    "transactionDetails": "EFTPOS DEBIT",
+    "debit": -24.8,
+    "balance": 170.43
+  },
+  {
+    "date": "12-Nov-20",
+    "transactionDetails": "TRANSFER CREDIT",
+    "credit": 200,
+    "balance": 195.23
+  },
+  {
+    "date": "12-Nov-20",
+    "transactionDetails": "MISCELLANEOUS DEBIT",
+    "debit": -38.45,
+    "balance": 93.74
+  },
+  {
+    "date": "15-Nov-20",
+    "transactionDetails": "TRANSFER DEBIT",
+    "debit": -500,
+    "balance": 1653.19
+  }
+]

@@ -4,6 +4,7 @@
   background-color: #e6e6e6;
   padding: 0 0 40px 0;
   position: relative;
+  min-height: calc(100vh - 122px);
   background-image: url("https://www.nab.com.au/content/dam/nabrwd/images/types/backgrounds/ib-login-banner-1797x800.jpg");
 }
 
